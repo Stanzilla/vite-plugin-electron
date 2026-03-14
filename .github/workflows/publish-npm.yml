@@ -26,23 +26,26 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Set up Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org
-
-      - name: Install Vite+
-        run: curl -fsSL https://vite.plus | bash
+          node-version: '24'
+          cache: true
 
       - name: Install dependencies
-        run: vp install --frozen-lockfile
+        run: vp install
 
-      - name: Build package
-        run: vp pack
+      - name: Run checks
+        run: vp check
 
       - name: Run tests
         run: vp test
+
+      - name: Build package
+        run: vp build
+
+      - name: Pack package
+        run: vp pack
 
       - name: Publish package
         env:

@@ -48,10 +48,11 @@
   },
   "scripts": {
     "dev": "vp pack --watch",
-    "build": "vp pack",
+    "build": "vp build",
     "format": "vp fmt",
     "format:check": "vp fmt --check",
     "test": "vp test",
+    "pack": "vp pack",
     "prepublishOnly": "vp pack && vp test",
     "prepare": "vp config"
   },
