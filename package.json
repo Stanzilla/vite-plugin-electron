@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-electron",
+  "name": "@stanzilla/vite-plugin-electron",
   "version": "1.0.0",
   "description": "Electron 🔗 Vite",
   "keywords": [
@@ -12,7 +12,7 @@
   "author": "Leo Wang(草鞋没号) <308487730@qq.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-vite/vite-plugin-electron.git"
+    "url": "git+https://github.com/Stanzilla/vite-plugin-electron.git"
   },
   "files": [
     "dist",
@@ -40,6 +40,11 @@
       "require": "./dist/simple.cjs"
     },
     "./*": "./*"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org"
   },
   "scripts": {
     "dev": "vp pack --watch",

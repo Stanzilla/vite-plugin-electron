@@ -1,0 +1,64 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: npm dist-tag to publish under
+        required: true
+        default: latest
+        type: string
+      dry_run:
+        description: Run the publish step in dry-run mode
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Install Vite+
+        run: curl -fsSL https://vite.plus | bash
+
+      - name: Install dependencies
+        run: ~/.vite-plus/bin/vp install --frozen-lockfile
+
+      - name: Run tests
+        run: ~/.vite-plus/bin/vp test
+
+      - name: Build package
+        run: ~/.vite-plus/bin/vp pack
+
+      - name: Publish package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+        run: |
+          publish_args=(
+            .
+            --access public
+            --tag "${{ inputs.tag }}"
+            --publish-branch main
+            --no-git-checks
+          )
+
+          if [ "${{ inputs.dry_run }}" = 'true' ]; then
+            publish_args+=(--dry-run)
+          fi
+
+          ~/.vite-plus/bin/vp pm publish "${publish_args[@]}"
