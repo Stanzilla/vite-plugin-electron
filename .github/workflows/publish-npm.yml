@@ -16,13 +16,23 @@ on:
 
 jobs:
   publish:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
 
     steps:
+      - name: Validate ref
+        run: |
+          case "${GITHUB_REF}" in
+            refs/heads/main|refs/tags/*)
+              ;;
+            *)
+              echo "::error::This workflow must be run from the main branch or a tag. Current ref: ${GITHUB_REF}"
+              exit 1
+              ;;
+          esac
+
       - name: Check out repository
         uses: actions/checkout@v6
 
