@@ -1,3 +1,9 @@
+## 1.0.1 (2026-03-14)
+
+- fix: use the package `pack` script consistently for library builds and publishing workflows
+- fix: allow the fork publish workflow to run from `main` or tag refs with explicit validation
+- fix: keep bundled output snapshots out of Vite+ lint/format so release checks stay stable
+
 ## 1.0.0 (2026-03-14)
 
 - feat: migrate to Vite 8 / Rolldown
