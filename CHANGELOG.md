@@ -1,3 +1,8 @@
+## 1.0.2 (2026-03-14)
+
+- fix: configure npm auth explicitly in the publish workflow when using `setup-vp`
+- fix: allow fork publishing from `main` or tag refs without branch-restricted publish arguments
+
 ## 1.0.1 (2026-03-14)
 
 - fix: use the package `pack` script consistently for library builds and publishing workflows
