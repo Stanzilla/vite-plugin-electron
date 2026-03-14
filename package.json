@@ -48,7 +48,7 @@
   },
   "scripts": {
     "dev": "vp pack --watch",
-    "build": "vp build",
+    "build": "vp pack",
     "format": "vp fmt",
     "format:check": "vp fmt --check",
     "test": "vp test",
