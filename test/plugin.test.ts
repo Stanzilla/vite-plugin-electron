@@ -28,7 +28,16 @@ describe('src/plugin', () => {
       path.join(__dirname, 'dist/external-main.js'),
       'utf-8',
     )
-    const normalMain = main.replace(normalizingNewLineRE, '\n')
+    const snapshot = fs.readFileSync(
+      path.join(__dirname, '__snapshots__/external-main.js'),
+      'utf-8',
+    )
+    const normalMain = main.replace(normalizingNewLineRE, '\n').trimEnd()
+    const normalSnapshot = snapshot
+      .replace(normalizingNewLineRE, '\n')
+      .trimEnd()
+
+    expect(normalMain).toBe(normalSnapshot)
 
     // Keep assertions semantic because Rolldown/Oxc codegen is intentionally different from Rollup.
     expect(normalMain).toContain('require("vite")')

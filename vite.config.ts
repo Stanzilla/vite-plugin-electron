@@ -11,6 +11,9 @@ export default defineConfig({
   staged: {
     '*': 'vp check --fix',
   },
+  lint: {
+    ignorePatterns: ['test/__snapshots__/external-main.js'],
+  },
   fmt: {
     tabWidth: 2,
     useTabs: false,
