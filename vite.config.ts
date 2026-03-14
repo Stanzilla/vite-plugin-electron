@@ -15,6 +15,7 @@ export default defineConfig({
     ignorePatterns: ['test/__snapshots__/external-main.js'],
   },
   fmt: {
+    ignorePatterns: ['test/__snapshots__/external-main.js'],
     tabWidth: 2,
     useTabs: false,
     semi: false,
