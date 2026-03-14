@@ -40,7 +40,7 @@ jobs:
         run: vp check
 
       - name: Pack package
-        run: vp pack
+        run: vp run pack
 
       - name: Run tests
         run: vp test
